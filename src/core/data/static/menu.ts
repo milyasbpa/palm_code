@@ -1,14 +1,16 @@
+import { routeToDevelopers, routeToGenres, routeToHome } from "@/core/routers";
+
 export const menu = [
   {
     name: "HOME",
-    link: "/",
+    link: routeToHome(),
   },
   {
     name: "DEVELOPER",
-    link: "/developer",
+    link: routeToDevelopers(),
   },
   {
     name: "GENRE",
-    link: "/genre",
+    link: routeToGenres(),
   },
 ];
