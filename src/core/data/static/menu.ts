@@ -1,14 +1,14 @@
-export const resellerMenu = [
+export const menu = [
   {
     name: "HOME",
     link: "/",
   },
   {
-    name: "DEVELOPERS",
-    link: "/products",
+    name: "DEVELOPER",
+    link: "/developer",
   },
   {
     name: "GENRE",
-    link: "/faq",
+    link: "/genre",
   },
 ];

@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import NavigationBarComponent from "@/core/ui/components/navigation_bar/NavigationBar.component";
 
-import { resellerMenu } from "@/core/data/static";
+import { menu } from "@/core/data/static";
 export interface IAppLayoutProps {
   children?: React.ReactNode;
 }
@@ -16,7 +16,7 @@ export default function AppLayout(props: IAppLayoutProps) {
         "relative"
       )}
     >
-      <NavigationBarComponent menus={resellerMenu} />
+      <NavigationBarComponent menus={menu} />
       {props.children}
     </main>
   );
