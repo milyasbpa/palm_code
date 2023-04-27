@@ -1,1 +1,1 @@
-export { default } from "./ItemCard.product";
+export { default } from "./ItemCard.genre";

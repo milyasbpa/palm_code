@@ -114,6 +114,7 @@ export default function ItemsGenre(props: IItemsGenreProps) {
       <div className={clsx("grid", "grid-cols-1", "w-full")}>
         {Object.keys(state.games.data).map((key) => (
           <div
+            key={key}
             className={clsx(
               "grid grid-cols-1 justify-center justify-items-center content-start items-start",
               "gap-y-[3rem] w-full max-w-[75rem]"
@@ -146,6 +147,7 @@ export default function ItemsGenre(props: IItemsGenreProps) {
                 .filter((_, i) => i < 4)
                 .map((game) => (
                   <ItemCardGames
+                    key={game.id}
                     id={game.id}
                     title={game.title}
                     short_description={game.short_description}

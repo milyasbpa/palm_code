@@ -127,6 +127,7 @@ export default function ItemsGames(props: IItemsGamesProps) {
           >
             {state.games.data?.map((game) => (
               <ItemCardGames
+                key={game.id}
                 id={game.id}
                 title={game.title}
                 short_description={game.short_description}
