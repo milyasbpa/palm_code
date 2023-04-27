@@ -1,7 +1,8 @@
 import * as React from "react";
 
 import HeaderComponent from "@/core/ui/components/header/Header.component";
-import ListGameContainer from "@/features/game/list/containers/List.game";
+import ListGameContainer from "@/features/home/games/containers/List.game";
+import { GamesHomeProvider } from "@/features/home/games/contexts/GamesHome.context";
 
 export interface HomePageProps {}
 
@@ -11,9 +12,9 @@ export default function HomePage(props: HomePageProps) {
     description: "Home Games",
   };
   return (
-    <>
+    <GamesHomeProvider>
       <HeaderComponent title={header.title} description={header.description} />
       <ListGameContainer />
-    </>
+    </GamesHomeProvider>
   );
 }

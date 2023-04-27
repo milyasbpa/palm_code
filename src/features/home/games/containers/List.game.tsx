@@ -1,15 +1,15 @@
 import AppLayout from "@/core/ui/layouts/app/AppLayout";
 import * as React from "react";
-import GameCardList from "../components/game_card/GameCard.list";
+import GameCardList from "../components/item_card/ItemCard.games";
 import clsx from "clsx";
+import ItemsGames from "../fragments/items/Items.games";
 
 export interface IListGameContainerProps {}
 
 export default function ListGameContainer(props: IListGameContainerProps) {
   const pageContent = {
-    title: "Produk makanan paling viral buat kamu",
-    description:
-      "Beli paket reseller di Maahir by Sribuu, dan dapatkan paket konten gratis!",
+    title: "Games",
+    description: "List of games",
   };
   return (
     <AppLayout>
@@ -87,36 +87,7 @@ export default function ListGameContainer(props: IListGameContainerProps) {
         </div>
 
         {/* body */}
-        <div
-          className={clsx(
-            "flex gap-[2rem]",
-            "box-border max-w-[1200px]",
-            "px-[1rem] sm:px-[0rem]"
-          )}
-        >
-          <div className={clsx("hidden sm:grid", "grid-cols-1", "w-full")}>
-            <div
-              className={clsx(
-                "grid grid-cols-1 justify-center content-start justify-items-center",
-                "gap-y-[3rem] w-full"
-              )}
-            >
-              <div
-                className={clsx(
-                  "grid justify-center justify-items-center",
-                  "max-w-[75rem] gap-x-[1.25rem] gap-y-[1.25rem]",
-                  "grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-                )}
-              >
-                <GameCardList />
-                <GameCardList />
-                <GameCardList />
-                <GameCardList />
-                <GameCardList />
-              </div>
-            </div>
-          </div>
-        </div>
+        <ItemsGames />
       </div>
     </AppLayout>
   );

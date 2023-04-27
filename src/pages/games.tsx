@@ -1,7 +1,7 @@
 import * as React from "react";
 import clsx from "clsx";
 import AppLayout from "@/core/ui/layouts/app/AppLayout";
-import ListGameContainer from "@/features/game/list/containers/List.game";
+import ListGameContainer from "@/features/home/games/containers/List.game";
 
 export interface IGamesPageProps {}
 
