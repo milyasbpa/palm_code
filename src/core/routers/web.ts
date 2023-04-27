@@ -1,3 +1,3 @@
 export const routeToHome = () => "/";
-export const routeToDevelopers = () => "/developers";
-export const routeToGenres = () => "/genres";
+export const routeToDevelopers = () => "/developer";
+export const routeToGenres = () => "/genre";

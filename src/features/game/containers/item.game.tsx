@@ -1,11 +1,11 @@
 import AppLayout from "@/core/ui/layouts/app/AppLayout";
 import * as React from "react";
 import clsx from "clsx";
-import ItemsGames from "../fragments/items/Items.genre";
+import ItemsGames from "../fragments/item/Item.game";
 
-export interface IListGenreContainerProps {}
+export interface IItemGameContainerProps {}
 
-export default function ListGenreContainer(props: IListGenreContainerProps) {
+export default function ItemGameContainer(props: IItemGameContainerProps) {
   const pageContent = {
     title: "Games",
     description: "List of games",
