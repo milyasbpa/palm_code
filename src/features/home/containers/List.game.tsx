@@ -1,18 +1,20 @@
 import AppLayout from "@/core/ui/layouts/app/AppLayout";
 import * as React from "react";
 import clsx from "clsx";
-import ItemsGames from "@/features/developers/fragments/items/Items.developers";
+import ItemsGames from "@/features/home/fragments/items/Items.games";
+import SearchGames from "@/features/home/fragments/search/Search.games";
+import CategoryFilterGames from "@/features/home/fragments/category_filter/CategoryFilter.games";
+import PlatformFilterGames from "@/features/home/fragments/platform_filter/PlatformFilter.games";
+import SortGames from "@/features/home/fragments/sort/Sort.games";
+import TopRatingGames from "../fragments/top_rating/TopRating.games";
 
-export interface IListDevelopersContainerProps {}
+export interface IListGameContainerProps {}
 
-export default function ListDevelopersContainer(
-  props: IListDevelopersContainerProps
-) {
+export default function ListGameContainer(props: IListGameContainerProps) {
   const pageContent = {
     title: "Games",
     description: "List of games",
   };
-
   return (
     <AppLayout>
       <div
@@ -57,10 +59,32 @@ export default function ListDevelopersContainer(
               {pageContent.description}
             </p>
           </div>
+
+          {/* <SearchProducts /> */}
         </div>
 
         {/* body */}
-        <ItemsGames />
+        <div
+          className={clsx(
+            "grid gap-y-[2rem]",
+            "box-border max-w-[1200px] w-full",
+            "px-[1rem] sm:px-[0rem]"
+          )}
+        >
+          <TopRatingGames />
+          <div
+            className={clsx(
+              "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 items-center justify-end w-full",
+              "gap-x-[2rem]"
+            )}
+          >
+            <CategoryFilterGames />
+            <PlatformFilterGames />
+            <SortGames />
+            <SearchGames />
+          </div>
+          <ItemsGames />
+        </div>
       </div>
     </AppLayout>
   );

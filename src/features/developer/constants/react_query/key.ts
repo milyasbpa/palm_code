@@ -1,7 +1,7 @@
 import { GetGamesPayloadRequestInterface } from "@/core/models/api";
 
-export const GenresReactQueryKey = {
+export const DevelopersReactQueryKey = {
   GetGames(payload?: GetGamesPayloadRequestInterface) {
-    return ["GenreReactQueryKey.GetGenre", [payload] as const];
+    return ["DevelopersReactQueryKey.GetGames", [payload] as const];
   },
 };

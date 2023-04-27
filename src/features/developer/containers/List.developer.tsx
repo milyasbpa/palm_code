@@ -3,10 +3,10 @@ import * as React from "react";
 import clsx from "clsx";
 import ItemsGames from "@/features/developers/fragments/items/Items.developers";
 
-export interface IListDevelopersContainerProps {}
+export interface IListDeveloperContainerProps {}
 
-export default function ListDevelopersContainer(
-  props: IListDevelopersContainerProps
+export default function ListDeveloperContainer(
+  props: IListDeveloperContainerProps
 ) {
   const pageContent = {
     title: "Games",
@@ -57,6 +57,7 @@ export default function ListDevelopersContainer(
               {pageContent.description}
             </p>
           </div>
+          {/* <SearchProducts /> */}
         </div>
 
         {/* body */}

@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import HeaderComponent from "@/core/ui/components/header/Header.component";
-import ListGameContainer from "@/features/home/games/containers/List.game";
-import { GamesHomeProvider } from "@/features/home/games/contexts/GamesHome.context";
+import ListGameContainer from "@/features/home/containers/List.game";
+import { GamesHomeProvider } from "@/features/home/contexts/GamesHome.context";
 
 export interface HomePageProps {}
 

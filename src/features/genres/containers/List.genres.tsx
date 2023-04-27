@@ -1,16 +1,14 @@
 import AppLayout from "@/core/ui/layouts/app/AppLayout";
 import * as React from "react";
 import clsx from "clsx";
-import ItemsGames from "@/features/developers/fragments/items/Items.developers";
+import ItemsGenres from "../fragments/items/Items.genres";
 
-export interface IListDevelopersContainerProps {}
+export interface IListGenresContainerProps {}
 
-export default function ListDevelopersContainer(
-  props: IListDevelopersContainerProps
-) {
+export default function ListGenresContainer(props: IListGenresContainerProps) {
   const pageContent = {
-    title: "Games",
-    description: "List of games",
+    title: "Games by Genre",
+    description: "List of games by genre",
   };
 
   return (
@@ -60,7 +58,7 @@ export default function ListDevelopersContainer(
         </div>
 
         {/* body */}
-        <ItemsGames />
+        <ItemsGenres />
       </div>
     </AppLayout>
   );

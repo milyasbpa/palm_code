@@ -5,12 +5,12 @@ import {
 } from "@/core/models/api";
 import { fetchGetGames } from "@/core/service/game";
 import { useQuery } from "@tanstack/react-query";
-import { DevelopersActionEnum } from "@/features/developers/contexts/Developers.types";
-import { DevelopersContext } from "@/features/developers/contexts/Developers.context";
-import { DevelopersReactQueryKey } from "../constants/react_query";
+import { GenreActionEnum } from "../contexts/Genre.types";
+import { GenreContext } from "../contexts/Genre.context";
+import { GenreReactQueryKey } from "../constants/react_query";
 
-export const useDevelopersGetGames = () => {
-  const { state, dispatch } = useContext(DevelopersContext);
+export const useGenreGetGames = () => {
+  const { state, dispatch } = useContext(GenreContext);
   const payload: GetGamesPayloadRequestInterface = useMemo(() => {
     return {
       params: {
@@ -20,7 +20,7 @@ export const useDevelopersGetGames = () => {
   }, []);
 
   const query = useQuery<GetGamesSuccessResponseInterface[]>(
-    DevelopersReactQueryKey.GetGames(payload),
+    GenreReactQueryKey.GetGames(payload),
     () => {
       return fetchGetGames(payload);
     },
@@ -36,15 +36,15 @@ export const useDevelopersGetGames = () => {
           }, {});
         };
 
-        const result = groupBy(data, "developer");
+        const result = groupBy(data, "genre");
         const filter = Object.keys(result)
-          .filter((_, index) => index < state.games.pagination.offset + 5)
+          .filter((_, index) => index < state.games.pagination.offset + 4)
           .reduce((acc, key) => {
             return { ...acc, [key]: result[key] };
           }, {});
 
         dispatch({
-          type: DevelopersActionEnum.AddGameData,
+          type: GenreActionEnum.AddGameData,
           payload: filter,
         });
       },

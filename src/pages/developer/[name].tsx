@@ -1,20 +1,20 @@
 import * as React from "react";
 
 import HeaderComponent from "@/core/ui/components/header/Header.component";
-import { GenresProvider } from "@/features/genres/contexts/Genres.context";
-import ListGenresContainer from "@/features/genres/containers/List.genres";
+import { DeveloperProvider } from "@/features/developer/contexts/Developer.context";
+import ListDeveloperContainer from "@/features/developer/containers/List.developer";
 
 export interface GenrePageProps {}
 
 export default function GenrePage(props: GenrePageProps) {
   const header = {
-    title: "Home | Games",
-    description: "Home Games",
+    title: "Game",
+    description: "Game",
   };
   return (
-    <GenresProvider>
+    <DeveloperProvider>
       <HeaderComponent title={header.title} description={header.description} />
-      <ListGenresContainer />
-    </GenresProvider>
+      <ListDeveloperContainer />
+    </DeveloperProvider>
   );
 }

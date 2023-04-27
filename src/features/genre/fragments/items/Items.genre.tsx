@@ -3,14 +3,14 @@ import { useInView } from "react-intersection-observer";
 import clsx from "clsx";
 import { useQueryClient } from "@tanstack/react-query";
 import ItemCardGames from "@/features/home/components/item_card/ItemCard.games";
-import { DevelopersContext } from "@/features/developers/contexts/Developers.context";
+import { GenreContext } from "../../contexts/Genre.context";
 import {
   GetGamesPayloadRequestInterface,
   GetGamesSuccessResponseInterface,
 } from "@/core/models/api";
-import { useDevelopersGetGames } from "@/features/developers/hooks/useGetGames.developers";
-import { DevelopersActionEnum } from "@/features/developers/contexts/Developers.types";
-import { DevelopersReactQueryKey } from "@/features/developers/constants/react_query";
+import { useGenreGetGames } from "../../hooks/useGetGames.genre";
+import { GenreActionEnum } from "../../contexts/Genre.types";
+import { GenreReactQueryKey } from "../../constants/react_query";
 
 export interface IItemsGenreProps {}
 
@@ -24,9 +24,8 @@ const groupBy = (array: any, key: any) => {
 };
 
 export default function ItemsGenre(props: IItemsGenreProps) {
-  const { state, dispatch } = useContext(DevelopersContext);
-  const { data: games, isFetching: isFetchingGetGames } =
-    useDevelopersGetGames();
+  const { state, dispatch } = useContext(GenreContext);
+  const { data: games, isFetching: isFetchingGetGames } = useGenreGetGames();
 
   const { ref, inView } = useInView();
   const queryClient = useQueryClient();
@@ -37,13 +36,13 @@ export default function ItemsGenre(props: IItemsGenreProps) {
       },
     };
   }, []);
-  console.log(state.games.data, "ini data");
 
   useEffect(() => {
     if (inView) {
+      console.log("inview");
       const data = groupBy(
         queryClient.getQueryData(
-          DevelopersReactQueryKey.GetGames(payload)
+          GenreReactQueryKey.GetGames(payload)
         ) as GetGamesSuccessResponseInterface[],
         "genre"
       );
@@ -54,52 +53,14 @@ export default function ItemsGenre(props: IItemsGenreProps) {
           return { ...acc, [key]: result[key] };
         }, {});
       dispatch({
-        type: DevelopersActionEnum.AddGameData,
+        type: GenreActionEnum.AddGameData,
         payload: filter,
       });
     }
   }, [inView]);
 
   if (isFetchingGetGames) {
-    return (
-      <div
-        className={clsx(
-          "flex gap-[2rem]",
-          "box-border max-w-[1200px]",
-          "px-[1rem] sm:px-[0rem]"
-        )}
-      >
-        <div className={clsx("grid", "grid-cols-1", "w-full")}>
-          <div
-            className={clsx(
-              "grid grid-cols-1 justify-center content-start justify-items-center",
-              "gap-y-[3rem] w-full"
-            )}
-          >
-            <div
-              className={clsx(
-                "grid justify-center justify-items-center",
-                "max-w-[75rem] gap-x-[1.25rem] gap-y-[1.25rem]",
-                "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
-              )}
-            >
-              {/* skeleton */}
-              {/* {state.games.data?.map((game) => (
-            <ItemCardGames
-              id={game.id}
-              title={game.title}
-              short_description={game.short_description}
-              publisher={game.publisher}
-              release_date={game.release_date}
-              developer={game.developer}
-              platform={game.platform}
-            />
-          ))} */}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    return <div></div>;
   }
 
   return (
@@ -110,18 +71,18 @@ export default function ItemsGenre(props: IItemsGenreProps) {
         "px-[1rem] sm:px-[0rem]"
       )}
     >
-      <div className={clsx("grid", "grid-cols-1", "w-full")}>
+      <div className={clsx("grid grid-cols-1 gap-y-[2rem] w-full")}>
         {Object.keys(state.games.data).map((key) => (
           <div
             key={key}
             className={clsx(
               "grid grid-cols-1 justify-center justify-items-center content-start items-start",
-              "gap-y-[3rem] w-full max-w-[75rem]"
+              "gap-y-[1rem] w-full max-w-[75rem]"
             )}
           >
             <div
               className={clsx(
-                "grid justify-start justify-items-start max-w-[75rem] w-full"
+                "grid grid-flow-col justify-between justify-items-start max-w-[75rem] w-full"
               )}
             >
               <p
@@ -133,12 +94,24 @@ export default function ItemsGenre(props: IItemsGenreProps) {
               >
                 {key}
               </p>
+
+              {state.games.data[key].length > 4 && (
+                <p
+                  className={clsx(
+                    "text-[0.75rem] sm:text-[1rem]",
+                    "font-semibold",
+                    "text-primary"
+                  )}
+                >
+                  {"See More"}
+                </p>
+              )}
             </div>
 
             <div
               className={clsx(
-                "grid justify-center justify-items-center",
-                "max-w-[75rem] gap-x-[1.25rem] gap-y-[1.25rem]",
+                "grid justify-between justify-items-center",
+                "gap-x-[1.25rem] gap-y-[1.25rem]",
                 "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
               )}
             >

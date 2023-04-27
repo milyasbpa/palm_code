@@ -1,1 +1,1 @@
-export { default } from "./List.genre";
+export { default } from "./List.genres";

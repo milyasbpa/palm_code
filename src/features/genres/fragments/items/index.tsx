@@ -1,1 +1,1 @@
-export { default } from "./Items.genre";
+export { default } from "./Items.genres";

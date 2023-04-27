@@ -5,9 +5,9 @@ import {
 } from "@/core/models/api";
 import { fetchGetGames } from "@/core/service/game";
 import { useQuery } from "@tanstack/react-query";
+import { GamesReactQueryKey } from "@/features/home/constants/react_query";
 import { DevelopersActionEnum } from "@/features/developers/contexts/Developers.types";
 import { DevelopersContext } from "@/features/developers/contexts/Developers.context";
-import { DevelopersReactQueryKey } from "../constants/react_query";
 
 export const useDevelopersGetGames = () => {
   const { state, dispatch } = useContext(DevelopersContext);
@@ -20,7 +20,7 @@ export const useDevelopersGetGames = () => {
   }, []);
 
   const query = useQuery<GetGamesSuccessResponseInterface[]>(
-    DevelopersReactQueryKey.GetGames(payload),
+    GamesReactQueryKey.GetGames(payload),
     () => {
       return fetchGetGames(payload);
     },
