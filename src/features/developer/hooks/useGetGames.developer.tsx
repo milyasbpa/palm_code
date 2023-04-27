@@ -1,4 +1,5 @@
 import { useContext, useMemo } from "react";
+import { useRouter } from "next/router";
 import {
   GetGamesPayloadRequestInterface,
   GetGamesSuccessResponseInterface,
@@ -11,6 +12,7 @@ import { DeveloperReactQueryKey } from "../constants/react_query";
 
 export const useDevelopersGetGames = () => {
   const { state, dispatch } = useContext(DevelopersContext);
+  const router = useRouter();
   const payload: GetGamesPayloadRequestInterface = useMemo(() => {
     return {
       params: {
@@ -25,6 +27,7 @@ export const useDevelopersGetGames = () => {
       return fetchGetGames(payload);
     },
     {
+      enabled: router.query.name !== undefined,
       retry: 0,
       onSuccess(data) {
         const groupBy = (array: any, key: any) => {
@@ -43,9 +46,15 @@ export const useDevelopersGetGames = () => {
             return { ...acc, [key]: result[key] };
           }, {});
 
+        const filteredDeveloper = Object.fromEntries(
+          Object.entries(filter).filter(([key]) =>
+            key.includes(String(router.query.name))
+          )
+        ) as any;
+
         dispatch({
           type: DevelopersActionEnum.AddGameData,
-          payload: filter,
+          payload: filteredDeveloper,
         });
       },
     }
