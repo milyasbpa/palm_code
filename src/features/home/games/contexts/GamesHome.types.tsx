@@ -11,10 +11,28 @@ type ActionMap<M extends { [index: string]: any }> = {
 
 // State Collection Types
 export interface InitialStateType {
+  top_rating: ITopRatingHomeData;
   games: IGamesHomeData;
 }
 
 // State Collection Types consist of:
+
+export interface ITopRatingHomeData {
+  data: {
+    id: number;
+    title: string;
+    thumbnail: string;
+    short_description: string;
+    game_url: string;
+    genre: string;
+    platform: string;
+    publisher: string;
+    developer: string;
+    release_date: string;
+    freetogame_profile_url: string;
+  }[];
+}
+
 export interface IGamesHomeData {
   category: {
     id: number;
@@ -32,6 +50,7 @@ export interface IGamesHomeData {
   pagination: {
     offset: number;
   };
+
   raw: {
     id: number;
     title: string;
@@ -61,10 +80,12 @@ export interface IGamesHomeData {
 }
 
 // Action Collection Types
-export type GamesHomeActions = GamesHomeDataActions;
+export type GamesHomeActions = GamesHomeDataActions | TopRatingHomeDataActions;
 
 // Action Collection Types consist of:
 export enum GamesHomeActionEnum {
+  // top rating
+  SetTopRatingData = "SetTopRatingData",
   // Data
   SetGamesData = "SetGamesData",
   AddGameData = "AddGameData",
@@ -74,6 +95,14 @@ export enum GamesHomeActionEnum {
   FilterByPlatform = "FilterByPlatform",
   SortBy = "SortBy",
 }
+
+// Top Rating
+type TopRatingHomeDataPayload = {
+  [GamesHomeActionEnum.SetTopRatingData]: ITopRatingHomeData;
+};
+
+export type TopRatingHomeDataActions =
+  ActionMap<TopRatingHomeDataPayload>[keyof ActionMap<TopRatingHomeDataPayload>];
 
 // Data
 type GamesHomeDataPayload = {

@@ -6,6 +6,7 @@ import SearchGames from "@/features/home/games/fragments/search/Search.games";
 import CategoryFilterGames from "@/features/home/games/fragments/category_filter/CategoryFilter.games";
 import PlatformFilterGames from "@/features/home/games/fragments/platform_filter/PlatformFilter.games";
 import SortGames from "@/features/home/games/fragments/sort/Sort.games";
+import TopRatingGames from "../fragments/top_rating/TopRating.games";
 
 export interface IListGameContainerProps {}
 
@@ -70,6 +71,7 @@ export default function ListGameContainer(props: IListGameContainerProps) {
             "px-[1rem] sm:px-[0rem]"
           )}
         >
+          <TopRatingGames />
           <div
             className={clsx(
               "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 items-center justify-end w-full",

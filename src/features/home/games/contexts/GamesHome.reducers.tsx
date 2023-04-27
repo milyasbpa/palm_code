@@ -2,7 +2,23 @@ import {
   IGamesHomeData,
   GamesHomeActionEnum,
   GamesHomeActions,
+  ITopRatingHomeData,
+  TopRatingHomeDataActions,
 } from "./GamesHome.types";
+
+export const TopRatingHomeDataReducer = (
+  state: ITopRatingHomeData,
+  action: GamesHomeActions
+) => {
+  switch (action.type) {
+    case GamesHomeActionEnum.SetTopRatingData: {
+      return action.payload;
+    }
+
+    default:
+      return state;
+  }
+};
 
 export const GamesHomeDataReducer = (
   state: IGamesHomeData,

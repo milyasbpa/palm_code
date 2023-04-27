@@ -1,8 +1,14 @@
 import React, { createContext, useReducer, Dispatch } from "react";
 import { GamesHomeActions, InitialStateType } from "./GamesHome.types";
-import { GamesHomeDataReducer } from "./GamesHome.reducers";
+import {
+  GamesHomeDataReducer,
+  TopRatingHomeDataReducer,
+} from "./GamesHome.reducers";
 
 const initialState: InitialStateType = {
+  top_rating: {
+    data: [],
+  },
   games: {
     category: {
       id: 0,
@@ -34,9 +40,10 @@ const GamesHomeContext = createContext<{
 });
 
 const mainReducer = (
-  { games }: InitialStateType,
+  { top_rating, games }: InitialStateType,
   action: GamesHomeActions
 ) => ({
+  top_rating: TopRatingHomeDataReducer(top_rating, action),
   games: GamesHomeDataReducer(games, action),
 });
 
