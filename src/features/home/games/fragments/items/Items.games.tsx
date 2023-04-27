@@ -86,16 +86,16 @@ export default function ItemsGames(props: IItemsGamesProps) {
             >
               {/* skeleton */}
               {/* {state.games.data?.map((game) => (
-            <ItemCardGames
-              id={game.id}
-              title={game.title}
-              short_description={game.short_description}
-              publisher={game.publisher}
-              release_date={game.release_date}
-              developer={game.developer}
-              platform={game.platform}
-            />
-          ))} */}
+                <ItemCardGames
+                  id={game.id}
+                  title={game.title}
+                  short_description={game.short_description}
+                  publisher={game.publisher}
+                  release_date={game.release_date}
+                  developer={game.developer}
+                  platform={game.platform}
+                />
+              ))} */}
             </div>
           </div>
         </div>
@@ -104,44 +104,36 @@ export default function ItemsGames(props: IItemsGamesProps) {
   }
 
   return (
-    <div
-      className={clsx(
-        "flex gap-[2rem]",
-        "box-border max-w-[1200px]",
-        "px-[1rem] sm:px-[0rem]"
-      )}
-    >
-      <div className={clsx("grid", "grid-cols-1", "w-full")}>
+    <div className={clsx("grid", "grid-cols-1", "w-full")}>
+      <div
+        className={clsx(
+          "grid grid-cols-1 justify-center content-start justify-items-center",
+          "gap-y-[3rem] w-full"
+        )}
+      >
         <div
           className={clsx(
-            "grid grid-cols-1 justify-center content-start justify-items-center",
-            "gap-y-[3rem] w-full"
+            "grid justify-center justify-items-center",
+            "max-w-[75rem] gap-x-[1.25rem] gap-y-[1.25rem]",
+            "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
           )}
         >
-          <div
-            className={clsx(
-              "grid justify-center justify-items-center",
-              "max-w-[75rem] gap-x-[1.25rem] gap-y-[1.25rem]",
-              "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
-            )}
-          >
-            {state.games.data?.map((game) => (
-              <ItemCardGames
-                key={game.id}
-                id={game.id}
-                title={game.title}
-                short_description={game.short_description}
-                publisher={game.publisher}
-                release_date={game.release_date}
-                developer={game.developer}
-                platform={game.platform}
-              />
-            ))}
-          </div>
+          {state.games.data?.map((game) => (
+            <ItemCardGames
+              key={game.id}
+              id={game.id}
+              title={game.title}
+              short_description={game.short_description}
+              publisher={game.publisher}
+              release_date={game.release_date}
+              developer={game.developer}
+              platform={game.platform}
+            />
+          ))}
         </div>
-        <div ref={ref} className={clsx("hidden")}>
-          {"bottom"}
-        </div>
+      </div>
+      <div ref={ref} className={clsx("hidden")}>
+        {"bottom"}
       </div>
     </div>
   );

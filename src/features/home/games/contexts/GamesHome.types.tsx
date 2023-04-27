@@ -16,6 +16,9 @@ export interface InitialStateType {
 
 // State Collection Types consist of:
 export interface IGamesHomeData {
+  category: undefined | string;
+  sort_by: undefined | string;
+  platform: undefined | string;
   pagination: {
     offset: number;
   };

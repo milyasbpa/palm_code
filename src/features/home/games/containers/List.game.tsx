@@ -1,8 +1,9 @@
 import AppLayout from "@/core/ui/layouts/app/AppLayout";
 import * as React from "react";
-import GameCardList from "../components/item_card/ItemCard.games";
 import clsx from "clsx";
 import ItemsGames from "../fragments/items/Items.games";
+import DropdownGames from "../components/dropdown/Dropdown.games";
+import AutocompleteGames from "../components/autocomplete/Autocomplete.games";
 
 export interface IListGameContainerProps {}
 
@@ -83,11 +84,28 @@ export default function ListGameContainer(props: IListGameContainerProps) {
               {pageContent.description}
             </p>
           </div>
+
           {/* <SearchProducts /> */}
         </div>
 
         {/* body */}
-        <ItemsGames />
+        <div
+          className={clsx(
+            "grid gap-y-[2rem]",
+            "box-border max-w-[1200px] w-full",
+            "px-[1rem] sm:px-[0rem]"
+          )}
+        >
+          <div
+            className={clsx(
+              "flex items-center justify-end gap-x-[2rem] w-full"
+            )}
+          >
+            <AutocompleteGames />
+            <DropdownGames />
+          </div>
+          <ItemsGames />
+        </div>
       </div>
     </AppLayout>
   );

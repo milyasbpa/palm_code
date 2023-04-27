@@ -4,6 +4,9 @@ import { GamesHomeDataReducer } from "./GamesHome.reducers";
 
 const initialState: InitialStateType = {
   games: {
+    category: undefined,
+    sort_by: undefined,
+    platform: undefined,
     pagination: {
       offset: 0,
     },
