@@ -82,53 +82,23 @@ export default function ItemsGenre(props: IItemsGenreProps) {
           >
             <div
               className={clsx(
-                "grid grid-flow-col justify-between justify-items-start max-w-[75rem] w-full"
-              )}
-            >
-              <p
-                className={clsx(
-                  "text-[0.75rem] sm:text-[1rem]",
-                  "font-bold",
-                  "text-independence"
-                )}
-              >
-                {key}
-              </p>
-
-              {state.games.data[key].length > 4 && (
-                <p
-                  className={clsx(
-                    "text-[0.75rem] sm:text-[1rem]",
-                    "font-semibold",
-                    "text-primary"
-                  )}
-                >
-                  {"See More"}
-                </p>
-              )}
-            </div>
-
-            <div
-              className={clsx(
                 "grid justify-between justify-items-center",
                 "gap-x-[1.25rem] gap-y-[1.25rem]",
                 "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
               )}
             >
-              {state.games.data[key]
-                .filter((_, i) => i < 4)
-                .map((game) => (
-                  <ItemCardGames
-                    key={game.id}
-                    id={game.id}
-                    title={game.title}
-                    short_description={game.short_description}
-                    publisher={game.publisher}
-                    release_date={game.release_date}
-                    developer={game.developer}
-                    platform={game.platform}
-                  />
-                ))}
+              {state.games.data[key].map((game) => (
+                <ItemCardGames
+                  key={game.id}
+                  id={game.id}
+                  title={game.title}
+                  short_description={game.short_description}
+                  publisher={game.publisher}
+                  release_date={game.release_date}
+                  developer={game.developer}
+                  platform={game.platform}
+                />
+              ))}
             </div>
           </div>
         ))}

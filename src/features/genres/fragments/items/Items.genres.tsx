@@ -1,4 +1,5 @@
 import { useContext, useMemo, useEffect } from "react";
+import { useRouter } from "next/router";
 import { useInView } from "react-intersection-observer";
 import clsx from "clsx";
 import { useQueryClient } from "@tanstack/react-query";
@@ -11,6 +12,7 @@ import {
 import { useGenresGetGames } from "../../hooks/useGetGames.genres";
 import { GenresActionEnum } from "../../contexts/Genres.types";
 import { GenresReactQueryKey } from "../../constants/react_query";
+import { routeToGenre } from "@/core/routers";
 
 export interface IItemsGenresProps {}
 
@@ -26,6 +28,7 @@ const groupBy = (array: any, key: any) => {
 export default function ItemsGenres(props: IItemsGenresProps) {
   const { state, dispatch } = useContext(GenresContext);
   const { data: games, isFetching: isFetchingGetGames } = useGenresGetGames();
+  const router = useRouter();
 
   const { ref, inView } = useInView();
   const queryClient = useQueryClient();
@@ -63,6 +66,10 @@ export default function ItemsGenres(props: IItemsGenresProps) {
     return <div></div>;
   }
 
+  const handleSeeMore = (e: React.MouseEvent<HTMLButtonElement>) => {
+    router.push(routeToGenre(e.currentTarget.value));
+  };
+
   return (
     <div
       className={clsx(
@@ -96,15 +103,17 @@ export default function ItemsGenres(props: IItemsGenresProps) {
               </p>
 
               {state.games.data[key].length > 4 && (
-                <p
+                <button
                   className={clsx(
                     "text-[0.75rem] sm:text-[1rem]",
                     "font-semibold",
                     "text-primary"
                   )}
+                  value={key}
+                  onClick={handleSeeMore}
                 >
                   {"See More"}
-                </p>
+                </button>
               )}
             </div>
 

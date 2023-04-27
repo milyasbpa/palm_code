@@ -1,14 +1,17 @@
 import AppLayout from "@/core/ui/layouts/app/AppLayout";
 import * as React from "react";
+import { useRouter } from "next/router";
 import clsx from "clsx";
 import ItemsGames from "../fragments/items/Items.genre";
 
 export interface IListGenreContainerProps {}
 
 export default function ListGenreContainer(props: IListGenreContainerProps) {
+  const router = useRouter();
   const pageContent = {
-    title: "Games by Genre",
-    description: "List of games by genre",
+    title: router.query?.name,
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor sem vitae pulvinar vestibulum. Vivamus molestie eros vitae sapien hendrerit pharetra. Integer id felis purus. Donec blandit commodo mauris vitae auctor. Aliquam quis condimentum mi, ullamcorper maximus metus. Maecenas vel lacinia justo, ac laoreet sem. Integer sed semper odio, eu vulputate quam. Donec eget tortor et quam suscipit tristique quis et arcu. Nunc sed sodales massa.",
   };
 
   return (

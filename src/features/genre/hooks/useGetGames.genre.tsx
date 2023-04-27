@@ -1,4 +1,5 @@
 import { useContext, useMemo } from "react";
+import { useRouter } from "next/router";
 import {
   GetGamesPayloadRequestInterface,
   GetGamesSuccessResponseInterface,
@@ -11,6 +12,7 @@ import { GenreReactQueryKey } from "../constants/react_query";
 
 export const useGenreGetGames = () => {
   const { state, dispatch } = useContext(GenreContext);
+  const router = useRouter();
   const payload: GetGamesPayloadRequestInterface = useMemo(() => {
     return {
       params: {
@@ -26,6 +28,7 @@ export const useGenreGetGames = () => {
     },
     {
       retry: 0,
+      enabled: router.query.name !== undefined,
       onSuccess(data) {
         const groupBy = (array: any, key: any) => {
           return array.reduce((hash: any, obj: any) => {
@@ -37,15 +40,18 @@ export const useGenreGetGames = () => {
         };
 
         const result = groupBy(data, "genre");
-        const filter = Object.keys(result)
-          .filter((_, index) => index < state.games.pagination.offset + 4)
-          .reduce((acc, key) => {
-            return { ...acc, [key]: result[key] };
-          }, {});
+        const filter = Object.keys(result).reduce((acc, key) => {
+          return { ...acc, [key]: result[key] };
+        }, {});
+        const filteredGenre = Object.fromEntries(
+          Object.entries(filter).filter(([key]) =>
+            key.includes(String(router.query.name))
+          )
+        ) as any;
 
         dispatch({
           type: GenreActionEnum.AddGameData,
-          payload: filter,
+          payload: filteredGenre,
         });
       },
     }
