@@ -1,7 +1,7 @@
 import * as React from "react";
 import clsx from "clsx";
 
-export interface IItemCardGenreProps {
+export interface IItemCardDevelopersProps {
   id?: number;
   title?: string;
   thumbnail?: string;
@@ -16,7 +16,7 @@ export interface IItemCardGenreProps {
   onClickItem?: (id: number) => void;
 }
 
-ItemCardGenre.defaultProps = {
+ItemCardDevelopers.defaultProps = {
   id: -1,
   title: "Overwatch 2",
   thumbnail: "https://www.freetogame.com/g/540/thumbnail.jpg",
@@ -31,7 +31,7 @@ ItemCardGenre.defaultProps = {
   freetogame_profile_url: "https://www.freetogame.com/overwatch-2",
 };
 
-export default function ItemCardGenre(props: IItemCardGenreProps) {
+export default function ItemCardDevelopers(props: IItemCardDevelopersProps) {
   const handleClickItem = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     if (props.onClickItem) {
@@ -45,7 +45,9 @@ export default function ItemCardGenre(props: IItemCardGenreProps) {
         "flex",
         "flex-col gap-[0.625rem] sm:gap-y-[1rem] justify-between",
         "w-full",
-        "rounded-2xl",
+        "p-[0.625rem] sm:p-4 rounded-2xl",
+        "shadow-1",
+        "bg-white",
         "cursor-pointer"
       )}
       onClick={handleClickItem}

@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import HeaderComponent from "@/core/ui/components/header/Header.component";
-import { GenreProvider } from "@/features/genres/contexts/Genre.context";
-import ListGenreContainer from "@/features/genres/containers/List.genre";
+import { DevelopersProvider } from "@/features/developers/contexts/Developers.context";
+import ListDevelopersContainer from "@/features/developers/containers/List.developers";
 
 export interface DevelopersPageProps {}
 
@@ -12,9 +12,9 @@ export default function DevelopersPage(props: DevelopersPageProps) {
     description: "Developers",
   };
   return (
-    <GenreProvider>
+    <DevelopersProvider>
       <HeaderComponent title={header.title} description={header.description} />
-      <ListGenreContainer />
-    </GenreProvider>
+      <ListDevelopersContainer />
+    </DevelopersProvider>
   );
 }

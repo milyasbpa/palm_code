@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import clsx from "clsx";
-import ItemCardGames from "@/features/home/games/components/item_card/ItemCard.games";
+import ItemCardGames from "@/features/game/components/item_card/ItemCard.game";
 import { GameContext } from "../../contexts/Game.context";
 
 import { useGameGetGame } from "../../hooks/useGetGame.game";

@@ -38,7 +38,7 @@ export const useGameGetGame = () => {
               id: data.id,
               title: data.title,
               thumbnail: data.thumbnail,
-              short_description: data.short_description,
+              short_description: data.description,
               game_url: data.game_url,
               genre: data.genre,
               platform: data.platform,
