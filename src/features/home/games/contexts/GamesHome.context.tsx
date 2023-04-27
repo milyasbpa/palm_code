@@ -4,12 +4,23 @@ import { GamesHomeDataReducer } from "./GamesHome.reducers";
 
 const initialState: InitialStateType = {
   games: {
-    category: undefined,
-    sort_by: undefined,
-    platform: undefined,
+    category: {
+      id: 0,
+      name: "All Categories",
+    },
+    sort_by: {
+      id: 0,
+      name: "release-date",
+    },
+    platform: {
+      id: 0,
+      name: "all",
+    },
+    search: "",
     pagination: {
       offset: 0,
     },
+    raw: [],
     data: [],
   },
 };

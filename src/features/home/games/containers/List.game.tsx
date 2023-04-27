@@ -1,9 +1,11 @@
 import AppLayout from "@/core/ui/layouts/app/AppLayout";
 import * as React from "react";
 import clsx from "clsx";
-import ItemsGames from "../fragments/items/Items.games";
-import DropdownGames from "../components/dropdown/Dropdown.games";
-import AutocompleteGames from "../components/autocomplete/Autocomplete.games";
+import ItemsGames from "@/features/home/games/fragments/items/Items.games";
+import SearchGames from "@/features/home/games/fragments/search/Search.games";
+import CategoryFilterGames from "@/features/home/games/fragments/category_filter/CategoryFilter.games";
+import PlatformFilterGames from "@/features/home/games/fragments/platform_filter/PlatformFilter.games";
+import SortGames from "@/features/home/games/fragments/sort/Sort.games";
 
 export interface IListGameContainerProps {}
 
@@ -23,34 +25,6 @@ export default function ListGameContainer(props: IListGameContainerProps) {
           "bg-gradient-to-r from-white to-mint-cream"
         )}
       >
-        {/* tools */}
-        <div
-          className={clsx(
-            "flex sm:hidden",
-            "items-center justify-between",
-            "px-[1rem] sm:px-[0rem]",
-            "w-full"
-          )}
-        >
-          <div
-            className={clsx("flex items-center justify-start gap-x-[0.625rem]")}
-          >
-            {/* <Link href={RouterPathName.Home}>
-              <NavigationIcon
-                className={clsx("w-[1.5rem] h-[1.5rem]", "fill-cetacean-blue")}
-              />
-            </Link> */}
-
-            <h1 className={clsx("text-[1rem] text-charleston-green font-bold")}>
-              {"Produk"}
-            </h1>
-          </div>
-
-          {/* <div>
-            <FilterDrawerProduct />
-          </div> */}
-        </div>
-
         {/* header */}
         <div
           className={clsx(
@@ -98,11 +72,14 @@ export default function ListGameContainer(props: IListGameContainerProps) {
         >
           <div
             className={clsx(
-              "flex items-center justify-end gap-x-[2rem] w-full"
+              "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 items-center justify-end w-full",
+              "gap-x-[2rem]"
             )}
           >
-            <AutocompleteGames />
-            <DropdownGames />
+            <CategoryFilterGames />
+            <PlatformFilterGames />
+            <SortGames />
+            <SearchGames />
           </div>
           <ItemsGames />
         </div>

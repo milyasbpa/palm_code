@@ -14,10 +14,19 @@ export const useHomeGetGames = () => {
   const payload: GetGamesPayloadRequestInterface = useMemo(() => {
     return {
       params: {
-        ["sort-by"]: "release-date",
+        ["sort-by"]: state.games.sort_by.name,
+        category:
+          state.games.category.name === "All Categories"
+            ? undefined
+            : state.games.category.name,
+        platform: state.games.platform.name,
       },
     };
-  }, []);
+  }, [
+    state.games.sort_by.name,
+    state.games.category.name,
+    state.games.platform.name,
+  ]);
 
   const query = useQuery<GetGamesSuccessResponseInterface[]>(
     GamesReactQueryKey.GetGames(payload),
@@ -46,6 +55,10 @@ export const useHomeGetGames = () => {
                 freetogame_profile_url: game.freetogame_profile_url,
               };
             }),
+        });
+        dispatch({
+          type: GamesHomeActionEnum.SetRawData,
+          payload: data,
         });
       },
     }

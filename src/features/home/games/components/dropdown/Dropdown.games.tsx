@@ -3,80 +3,48 @@ import clsx from "clsx";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
-const people = [
-  { name: "all category" },
-  { name: "mmorpg" },
-  { name: "shooter" },
-  { name: "strategy" },
-  { name: "moba" },
-  { name: "racing" },
-  { name: "sports" },
-  { name: "social" },
-  { name: "sandbox" },
-  { name: "open-world" },
-  { name: "survival" },
-  { name: "pvp" },
-  { name: "pve" },
-  { name: "pixel" },
-  { name: "voxel" },
-  { name: "zombie" },
-  { name: "turn-based" },
-  { name: "first-person" },
-  { name: "third-Person" },
-  { name: "top-down" },
-  { name: "tank" },
-  { name: "space" },
-  { name: "sailing" },
-  { name: "side-scroller" },
-  { name: "superhero" },
-  { name: "permadeath" },
-  { name: "card" },
-  { name: "battle-royale" },
-  { name: "mmo" },
-  { name: "mmofps" },
-  { name: "mmotps" },
-  { name: "3d" },
-  { name: "2d" },
-  { name: "anime" },
-  { name: "fantasy" },
-  { name: "sci-fi" },
-  { name: "fighting" },
-  { name: "action-rpg" },
-  { name: "action" },
-  { name: "military" },
-  { name: "martial-arts" },
-  { name: "flight" },
-  { name: "low-spec" },
-  { name: "tower-defense" },
-  { name: "horror" },
-  { name: "mmorts" },
-];
-
 interface IDropdownGames {
-  onSelect?: (data: { name: string }) => void;
+  label?: string;
+  options?: { id: number; name: string }[];
+  onSelect?: (data: { id: number; name: string }) => void;
 }
 
-DropdownGames.defaultProps = {};
+DropdownGames.defaultProps = {
+  label: "",
+  options: [],
+};
 
 export default function DropdownGames(props: IDropdownGames) {
-  const [selected, setSelected] = useState(people[0]);
+  const [selected, setSelected] = useState<{ id: number; name: string }>(
+    props.options ? props.options[0] : { id: 0, name: "" }
+  );
 
-  const handleSelect = (data: { name: string }) => {
+  const handleSelect = (data: { id: number; name: string }) => {
     setSelected(data);
     if (props.onSelect) {
       props.onSelect(data);
     }
   };
   return (
-    <div>
+    <div
+      className={clsx(
+        "grid grid-cols-1 w-full gap-y-[0.5rem] place-content-start place-items-start"
+      )}
+    >
+      <p className={clsx("text-[1rem] text-dark-charcoal font-bold")}>
+        {props.label}
+      </p>
+
       <Listbox value={selected} onChange={handleSelect}>
-        <div className={clsx("relative")}>
+        <div className={clsx("relative w-full")}>
           <Listbox.Button
             className={clsx(
               "relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
             )}
           >
-            <span className={clsx("block truncate")}>{selected.name}</span>
+            <span className={clsx("block truncate")}>
+              {selected?.name || ""}
+            </span>
             <span
               className={clsx(
                 "pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"
@@ -99,15 +67,15 @@ export default function DropdownGames(props: IDropdownGames) {
                 "absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
               )}
             >
-              {people.map((person, personIdx) => (
+              {props.options?.map((option, optionIdx) => (
                 <Listbox.Option
-                  key={personIdx}
+                  key={option.id}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 pl-10 pr-4 ${
                       active ? "bg-amber-100 text-amber-900" : "text-gray-900"
                     }`
                   }
-                  value={person}
+                  value={option}
                 >
                   {({ selected }) => (
                     <>
@@ -116,7 +84,7 @@ export default function DropdownGames(props: IDropdownGames) {
                           selected ? "font-medium" : "font-normal"
                         }`}
                       >
-                        {person.name}
+                        {option.name}
                       </span>
                       {selected ? (
                         <span

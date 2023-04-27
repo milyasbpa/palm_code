@@ -32,11 +32,7 @@ export default function ItemsGames(props: IItemsGamesProps) {
     if (inView) {
       dispatch({
         type: GamesHomeActionEnum.AddGameData,
-        payload: (
-          queryClient.getQueryData(
-            GamesReactQueryKey.GetGames(payload)
-          ) as GetGamesSuccessResponseInterface[]
-        )
+        payload: state.games.raw
           .filter(
             (_, index) =>
               index > state.games.data.length &&
@@ -132,7 +128,7 @@ export default function ItemsGames(props: IItemsGamesProps) {
           ))}
         </div>
       </div>
-      <div ref={ref} className={clsx("hidden")}>
+      <div ref={ref} className={clsx("bg-black w-full")}>
         {"bottom"}
       </div>
     </div>

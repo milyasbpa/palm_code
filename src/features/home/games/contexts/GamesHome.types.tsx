@@ -16,12 +16,35 @@ export interface InitialStateType {
 
 // State Collection Types consist of:
 export interface IGamesHomeData {
-  category: undefined | string;
-  sort_by: undefined | string;
-  platform: undefined | string;
+  category: {
+    id: number;
+    name: string;
+  };
+  sort_by: {
+    id: number;
+    name: string;
+  };
+  platform: {
+    id: number;
+    name: string;
+  };
+  search: string;
   pagination: {
     offset: number;
   };
+  raw: {
+    id: number;
+    title: string;
+    thumbnail: string;
+    short_description: string;
+    game_url: string;
+    genre: string;
+    platform: string;
+    publisher: string;
+    developer: string;
+    release_date: string;
+    freetogame_profile_url: string;
+  }[];
   data: {
     id: number;
     title: string;
@@ -45,6 +68,11 @@ export enum GamesHomeActionEnum {
   // Data
   SetGamesData = "SetGamesData",
   AddGameData = "AddGameData",
+  SetRawData = "SetRawData",
+  SearchGame = "SearchGame",
+  FilterByCategory = "FilterByCategory",
+  FilterByPlatform = "FilterByPlatform",
+  SortBy = "SortBy",
 }
 
 // Data
@@ -63,6 +91,23 @@ type GamesHomeDataPayload = {
     release_date: string;
     freetogame_profile_url: string;
   }[];
+  [GamesHomeActionEnum.SetRawData]: {
+    id: number;
+    title: string;
+    thumbnail: string;
+    short_description: string;
+    game_url: string;
+    genre: string;
+    platform: string;
+    publisher: string;
+    developer: string;
+    release_date: string;
+    freetogame_profile_url: string;
+  }[];
+  [GamesHomeActionEnum.SearchGame]: string;
+  [GamesHomeActionEnum.FilterByCategory]: { id: number; name: string };
+  [GamesHomeActionEnum.FilterByPlatform]: { id: number; name: string };
+  [GamesHomeActionEnum.SortBy]: { id: number; name: string };
 };
 
 export type GamesHomeDataActions =
