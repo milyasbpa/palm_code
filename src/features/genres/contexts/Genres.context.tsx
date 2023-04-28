@@ -7,6 +7,7 @@ const initialState: InitialStateType = {
     pagination: {
       offset: 0,
     },
+    raw: {},
     data: {},
   },
 };

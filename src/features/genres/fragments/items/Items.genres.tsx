@@ -1,63 +1,34 @@
-import { useContext, useMemo, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useInView } from "react-intersection-observer";
 import clsx from "clsx";
-import { useQueryClient } from "@tanstack/react-query";
 import ItemCardGames from "@/features/home/components/item_card/ItemCard.games";
 import { GenresContext } from "../../contexts/Genres.context";
-import {
-  GetGamesPayloadRequestInterface,
-  GetGamesSuccessResponseInterface,
-} from "@/core/models/api";
 import { useGenresGetGames } from "../../hooks/useGetGames.genres";
 import { GenresActionEnum } from "../../contexts/Genres.types";
-import { GenresReactQueryKey } from "../../constants/react_query";
 import { routeToGenre } from "@/core/routers";
 
 export interface IItemsGenresProps {}
 
-const groupBy = (array: any, key: any) => {
-  return array.reduce((hash: any, obj: any) => {
-    if (obj[key] === undefined) return hash;
-    return Object.assign(hash, {
-      [obj[key]]: (hash[obj[key]] || []).concat(obj),
-    });
-  }, {});
-};
-
 export default function ItemsGenres(props: IItemsGenresProps) {
   const { state, dispatch } = useContext(GenresContext);
-  const { data: games, isFetching: isFetchingGetGames } = useGenresGetGames();
+  const { isFetching: isFetchingGetGames } = useGenresGetGames();
   const router = useRouter();
 
   const { ref, inView } = useInView();
-  const queryClient = useQueryClient();
-  const payload: GetGamesPayloadRequestInterface = useMemo(() => {
-    return {
-      params: {
-        ["sort-by"]: "release-date",
-      },
-    };
-  }, []);
 
   useEffect(() => {
     if (inView) {
       console.log("inview");
-      const data = groupBy(
-        queryClient.getQueryData(
-          GenresReactQueryKey.GetGames(payload)
-        ) as GetGamesSuccessResponseInterface[],
-        "genres"
-      );
-      const result = groupBy(data, "genres");
-      const filter = Object.keys(result)
+
+      const filter = Object.keys(state.games.raw)
         .filter((_, index) => index < state.games.pagination.offset + 4)
         .reduce((acc, key) => {
-          return { ...acc, [key]: result[key] };
+          return { ...acc, [key]: state.games.raw[key] };
         }, {});
       dispatch({
         type: GenresActionEnum.AddGameData,
-        payload: filter,
+        payload: { ...state.games.data, ...filter },
       });
     }
   }, [inView]);
@@ -65,6 +36,8 @@ export default function ItemsGenres(props: IItemsGenresProps) {
   if (isFetchingGetGames) {
     return <div></div>;
   }
+
+  console.log(state.games.data, state.games.raw);
 
   const handleSeeMore = (e: React.MouseEvent<HTMLButtonElement>) => {
     router.push(routeToGenre(e.currentTarget.value));
@@ -124,27 +97,23 @@ export default function ItemsGenres(props: IItemsGenresProps) {
                 "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
               )}
             >
-              {state.games.data[key]
-                .filter((_, i) => i < 4)
-                .map((game) => (
-                  <ItemCardGames
-                    key={game.id}
-                    id={game.id}
-                    title={game.title}
-                    short_description={game.short_description}
-                    publisher={game.publisher}
-                    release_date={game.release_date}
-                    developer={game.developer}
-                    platform={game.platform}
-                  />
-                ))}
+              {state.games.data[key].map((game) => (
+                <ItemCardGames
+                  key={game.id}
+                  id={game.id}
+                  title={game.title}
+                  short_description={game.short_description}
+                  publisher={game.publisher}
+                  release_date={game.release_date}
+                  developer={game.developer}
+                  platform={game.platform}
+                />
+              ))}
             </div>
           </div>
         ))}
 
-        <div ref={ref} className={clsx("hidden")}>
-          {"bottom"}
-        </div>
+        <div ref={ref}>{"bottom"}</div>
       </div>
     </div>
   );

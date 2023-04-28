@@ -18,6 +18,13 @@ export const GamesGenresReducer = (
         data: action.payload,
       };
     }
+    case GenresActionEnum.SetRawData: {
+      return {
+        ...state,
+
+        raw: action.payload,
+      };
+    }
 
     default:
       return state;

@@ -3,7 +3,6 @@ import {
   GamesHomeActionEnum,
   GamesHomeActions,
   ITopRatingHomeData,
-  TopRatingHomeDataActions,
 } from "./GamesHome.types";
 
 export const TopRatingHomeDataReducer = (

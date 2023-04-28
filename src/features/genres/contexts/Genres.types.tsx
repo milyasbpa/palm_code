@@ -19,6 +19,22 @@ export interface IGamesGenres {
   pagination: {
     offset: number;
   };
+  raw: {
+    [key: string]: {
+      id: number;
+      title: string;
+      thumbnail: string;
+      short_description: string;
+      game_url: string;
+      genre: string;
+      platform: string;
+      publisher: string;
+      developer: string;
+      release_date: string;
+      freetogame_profile_url: string;
+    }[];
+  };
+
   data: {
     [key: string]: {
       id: number;
@@ -44,13 +60,29 @@ export enum GenresActionEnum {
   // Data
   SetGamesData = "SetGamesData",
   AddGameData = "AddGameData",
+  SetRawData = "SetRawData",
 }
 
 // Data
 type GenresDataPayload = {
   [GenresActionEnum.SetGamesData]: IGamesGenres;
   [GenresActionEnum.AddGameData]: {
-    // [key: string]: {[key:string]:any};
+    [key: string]: {
+      id: number;
+      title: string;
+      thumbnail: string;
+      short_description: string;
+      game_url: string;
+      genre: string;
+      platform: string;
+      publisher: string;
+      developer: string;
+      release_date: string;
+      freetogame_profile_url: string;
+    }[];
+  };
+
+  [GenresActionEnum.SetRawData]: {
     [key: string]: {
       id: number;
       title: string;

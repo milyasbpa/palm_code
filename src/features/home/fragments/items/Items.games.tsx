@@ -30,7 +30,6 @@ export default function ItemsGames(props: IItemsGamesProps) {
 
   useEffect(() => {
     if (inView) {
-      console.log(inView, "ini inview");
       dispatch({
         type: GamesHomeActionEnum.AddGameData,
         payload: state.games.raw

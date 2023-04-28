@@ -38,7 +38,7 @@ export const useGenresGetGames = () => {
 
         const result = groupBy(data, "genre");
         const filter = Object.keys(result)
-          .filter((_, index) => index < state.games.pagination.offset + 4)
+          .filter((_, index) => index < 4)
           .reduce((acc, key) => {
             return { ...acc, [key]: result[key] };
           }, {});
@@ -46,6 +46,10 @@ export const useGenresGetGames = () => {
         dispatch({
           type: GenresActionEnum.AddGameData,
           payload: filter,
+        });
+        dispatch({
+          type: GenresActionEnum.SetRawData,
+          payload: result,
         });
       },
     }
