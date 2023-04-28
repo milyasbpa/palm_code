@@ -103,7 +103,7 @@ export default function ItemsGenre(props: IItemsGenreProps) {
           </div>
         ))}
 
-        <div ref={ref} className={clsx("hidden")}>
+        <div ref={ref} className={clsx("opacity-0")}>
           {"bottom"}
         </div>
       </div>

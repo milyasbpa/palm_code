@@ -2,59 +2,28 @@ import { useContext, useMemo, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useInView } from "react-intersection-observer";
 import clsx from "clsx";
-import { useQueryClient } from "@tanstack/react-query";
 import ItemCardGames from "@/features/home/components/item_card/ItemCard.games";
 import { DevelopersContext } from "@/features/developers/contexts/Developers.context";
-import {
-  GetGamesPayloadRequestInterface,
-  GetGamesSuccessResponseInterface,
-} from "@/core/models/api";
 import { useDevelopersGetGames } from "@/features/developers/hooks/useGetGames.developers";
 import { DevelopersActionEnum } from "@/features/developers/contexts/Developers.types";
-import { DevelopersReactQueryKey } from "@/features/developers/constants/react_query";
 import { routeToDeveloper } from "@/core/routers";
 
 export interface IItemsGenreProps {}
-
-const groupBy = (array: any, key: any) => {
-  return array.reduce((hash: any, obj: any) => {
-    if (obj[key] === undefined) return hash;
-    return Object.assign(hash, {
-      [obj[key]]: (hash[obj[key]] || []).concat(obj),
-    });
-  }, {});
-};
 
 export default function ItemsGenre(props: IItemsGenreProps) {
   const { state, dispatch } = useContext(DevelopersContext);
   const router = useRouter();
 
-  const { data: games, isFetching: isFetchingGetGames } =
-    useDevelopersGetGames();
+  const { isFetching: isFetchingGetGames } = useDevelopersGetGames();
 
   const { ref, inView } = useInView();
-  const queryClient = useQueryClient();
-  const payload: GetGamesPayloadRequestInterface = useMemo(() => {
-    return {
-      params: {
-        ["sort-by"]: "release-date",
-      },
-    };
-  }, []);
 
   useEffect(() => {
     if (inView) {
-      const data = groupBy(
-        queryClient.getQueryData(
-          DevelopersReactQueryKey.GetGames(payload)
-        ) as GetGamesSuccessResponseInterface[],
-        "genre"
-      );
-      const result = groupBy(data, "genre");
-      const filter = Object.keys(result)
+      const filter = Object.keys(state.games.raw)
         .filter((_, index) => index < state.games.pagination.offset + 4)
         .reduce((acc, key) => {
-          return { ...acc, [key]: result[key] };
+          return { ...acc, [key]: state.games.raw[key] };
         }, {});
       dispatch({
         type: DevelopersActionEnum.AddGameData,
@@ -143,7 +112,7 @@ export default function ItemsGenre(props: IItemsGenreProps) {
           </div>
         ))}
 
-        <div ref={ref} className={clsx("hidden")}>
+        <div ref={ref} className={clsx("opacity-0")}>
           {"bottom"}
         </div>
       </div>

@@ -19,8 +19,6 @@ export default function ItemsGenres(props: IItemsGenresProps) {
 
   useEffect(() => {
     if (inView) {
-      console.log("inview");
-
       const filter = Object.keys(state.games.raw)
         .filter((_, index) => index < state.games.pagination.offset + 4)
         .reduce((acc, key) => {
@@ -36,8 +34,6 @@ export default function ItemsGenres(props: IItemsGenresProps) {
   if (isFetchingGetGames) {
     return <div></div>;
   }
-
-  console.log(state.games.data, state.games.raw);
 
   const handleSeeMore = (e: React.MouseEvent<HTMLButtonElement>) => {
     router.push(routeToGenre(e.currentTarget.value));
@@ -115,7 +111,9 @@ export default function ItemsGenres(props: IItemsGenresProps) {
           </div>
         ))}
 
-        <div ref={ref}>{"bottom"}</div>
+        <div ref={ref} className={clsx("opacity-0")}>
+          {"bottom"}
+        </div>
       </div>
     </div>
   );

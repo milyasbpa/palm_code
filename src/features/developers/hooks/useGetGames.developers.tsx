@@ -38,7 +38,7 @@ export const useDevelopersGetGames = () => {
 
         const result = groupBy(data, "developer");
         const filter = Object.keys(result)
-          .filter((_, index) => index < state.games.pagination.offset + 5)
+          .filter((_, index) => index < state.games.pagination.offset + 4)
           .reduce((acc, key) => {
             return { ...acc, [key]: result[key] };
           }, {});
@@ -46,6 +46,11 @@ export const useDevelopersGetGames = () => {
         dispatch({
           type: DevelopersActionEnum.AddGameData,
           payload: filter,
+        });
+
+        dispatch({
+          type: DevelopersActionEnum.SetRawData,
+          payload: result,
         });
       },
     }

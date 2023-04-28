@@ -22,6 +22,13 @@ export const GamesDevelopersReducer = (
         data: action.payload,
       };
     }
+    case DevelopersActionEnum.SetRawData: {
+      return {
+        ...state,
+
+        raw: action.payload,
+      };
+    }
 
     default:
       return state;

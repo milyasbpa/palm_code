@@ -128,7 +128,9 @@ export default function ItemsGames(props: IItemsGamesProps) {
           ))}
         </div>
       </div>
-      <div ref={ref}>{"bottom"}</div>
+      <div ref={ref} className={clsx("opacity-0")}>
+        {"bottom"}
+      </div>
     </div>
   );
 }
