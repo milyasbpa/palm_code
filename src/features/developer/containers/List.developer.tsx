@@ -2,7 +2,7 @@ import AppLayout from "@/core/ui/layouts/app/AppLayout";
 import * as React from "react";
 import { useRouter } from "next/router";
 import clsx from "clsx";
-import ItemsGames from "@/features/developers/fragments/items/Items.developers";
+import ItemDeveloper from "@/features/developer/fragments/items/Items.developer";
 
 export interface IListDeveloperContainerProps {}
 
@@ -63,7 +63,7 @@ export default function ListDeveloperContainer(
         </div>
 
         {/* body */}
-        <ItemsGames />
+        <ItemDeveloper />
       </div>
     </AppLayout>
   );

@@ -8,9 +8,9 @@ import { useDevelopersGetGames } from "@/features/developers/hooks/useGetGames.d
 import { DevelopersActionEnum } from "@/features/developers/contexts/Developers.types";
 import { routeToDeveloper } from "@/core/routers";
 
-export interface IItemsGenreProps {}
+export interface IItemsDevelopersProps {}
 
-export default function ItemsGenre(props: IItemsGenreProps) {
+export default function ItemsDevelopers(props: IItemsDevelopersProps) {
   const { state, dispatch } = useContext(DevelopersContext);
   const router = useRouter();
 

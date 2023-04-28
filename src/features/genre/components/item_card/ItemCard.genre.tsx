@@ -1,5 +1,7 @@
 import * as React from "react";
 import clsx from "clsx";
+import { useRouter } from "next/router";
+import { routeToGame } from "@/core/routers";
 
 export interface IItemCardGenreProps {
   id?: number;
@@ -32,7 +34,9 @@ ItemCardGenre.defaultProps = {
 };
 
 export default function ItemCardGenre(props: IItemCardGenreProps) {
-  const handleClickItem = (e: React.MouseEvent<HTMLDivElement>) => {
+  const router = useRouter();
+  const handleClickItem = (e: React.MouseEvent<HTMLButtonElement>) => {
+    router.push(routeToGame(parseInt(e.currentTarget.value)));
     e.stopPropagation();
     if (props.onClickItem) {
       props.onClickItem(parseInt(e.currentTarget.title));
@@ -40,7 +44,7 @@ export default function ItemCardGenre(props: IItemCardGenreProps) {
   };
 
   return (
-    <div
+    <button
       className={clsx(
         "flex",
         "flex-col gap-[0.625rem] sm:gap-y-[1rem] justify-between",
@@ -108,6 +112,6 @@ export default function ItemCardGenre(props: IItemCardGenreProps) {
           </div>
         </div>
       </div>
-    </div>
+    </button>
   );
 }

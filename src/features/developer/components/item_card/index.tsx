@@ -1,1 +1,1 @@
-export { default } from "./ItemCard.developers";
+export { default } from "./ItemCard.developer";

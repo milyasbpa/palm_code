@@ -6,12 +6,12 @@ import {
 } from "@/core/models/api";
 import { fetchGetGames } from "@/core/service/game";
 import { useQuery } from "@tanstack/react-query";
-import { DevelopersActionEnum } from "@/features/developers/contexts/Developers.types";
-import { DevelopersContext } from "@/features/developers/contexts/Developers.context";
 import { DeveloperReactQueryKey } from "../constants/react_query";
+import { DeveloperContext } from "../contexts/Developer.context";
+import { DeveloperActionEnum } from "../contexts/Developer.types";
 
-export const useDevelopersGetGames = () => {
-  const { state, dispatch } = useContext(DevelopersContext);
+export const useDeveloperGetGames = () => {
+  const { state, dispatch } = useContext(DeveloperContext);
   const router = useRouter();
   const payload: GetGamesPayloadRequestInterface = useMemo(() => {
     return {
@@ -53,7 +53,7 @@ export const useDevelopersGetGames = () => {
         ) as any;
 
         dispatch({
-          type: DevelopersActionEnum.AddGameData,
+          type: DeveloperActionEnum.AddGameData,
           payload: filteredDeveloper,
         });
       },

@@ -1,16 +1,10 @@
-import { useContext, useMemo, useEffect } from "react";
+import { useContext } from "react";
 import { useInView } from "react-intersection-observer";
 import clsx from "clsx";
-import { useQueryClient } from "@tanstack/react-query";
-import ItemCardGames from "@/features/home/components/item_card/ItemCard.games";
-import { DevelopersContext } from "@/features/developers/contexts/Developers.context";
-import {
-  GetGamesPayloadRequestInterface,
-  GetGamesSuccessResponseInterface,
-} from "@/core/models/api";
+
 import { useDevelopersGetGames } from "@/features/developers/hooks/useGetGames.developers";
-import { DevelopersActionEnum } from "@/features/developers/contexts/Developers.types";
-import { DevelopersReactQueryKey } from "@/features/developers/constants/react_query";
+import ItemCardDeveloper from "../../components/item_card/ItemCard.developer";
+import { DeveloperContext } from "../../contexts/Developer.context";
 
 export interface IItemsGenreProps {}
 
@@ -24,82 +18,13 @@ const groupBy = (array: any, key: any) => {
 };
 
 export default function ItemsGenre(props: IItemsGenreProps) {
-  const { state, dispatch } = useContext(DevelopersContext);
-  const { data: games, isFetching: isFetchingGetGames } =
-    useDevelopersGetGames();
+  const { state, dispatch } = useContext(DeveloperContext);
+  const { isFetching: isFetchingGetGames } = useDevelopersGetGames();
 
   const { ref, inView } = useInView();
-  const queryClient = useQueryClient();
-  const payload: GetGamesPayloadRequestInterface = useMemo(() => {
-    return {
-      params: {
-        ["sort-by"]: "release-date",
-      },
-    };
-  }, []);
-  console.log(state.games.data, "ini data");
-
-  useEffect(() => {
-    if (inView) {
-      const data = groupBy(
-        queryClient.getQueryData(
-          DevelopersReactQueryKey.GetGames(payload)
-        ) as GetGamesSuccessResponseInterface[],
-        "genre"
-      );
-      const result = groupBy(data, "genre");
-      const filter = Object.keys(result)
-        .filter((_, index) => index < state.games.pagination.offset + 4)
-        .reduce((acc, key) => {
-          return { ...acc, [key]: result[key] };
-        }, {});
-      dispatch({
-        type: DevelopersActionEnum.AddGameData,
-        payload: filter,
-      });
-    }
-  }, [inView]);
 
   if (isFetchingGetGames) {
-    return (
-      <div
-        className={clsx(
-          "flex gap-[2rem]",
-          "box-border max-w-[1200px]",
-          "px-[1rem] sm:px-[0rem]"
-        )}
-      >
-        <div className={clsx("grid", "grid-cols-1", "w-full")}>
-          <div
-            className={clsx(
-              "grid grid-cols-1 justify-center content-start justify-items-center",
-              "gap-y-[3rem] w-full"
-            )}
-          >
-            <div
-              className={clsx(
-                "grid justify-center justify-items-center",
-                "max-w-[75rem] gap-x-[1.25rem] gap-y-[1.25rem]",
-                "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
-              )}
-            >
-              {/* skeleton */}
-              {/* {state.games.data?.map((game) => (
-            <ItemCardGames
-              id={game.id}
-              title={game.title}
-              short_description={game.short_description}
-              publisher={game.publisher}
-              release_date={game.release_date}
-              developer={game.developer}
-              platform={game.platform}
-            />
-          ))} */}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    return <div />;
   }
 
   return (
@@ -145,7 +70,7 @@ export default function ItemsGenre(props: IItemsGenreProps) {
               {state.games.data[key]
                 .filter((_, i) => i < 4)
                 .map((game) => (
-                  <ItemCardGames
+                  <ItemCardDeveloper
                     key={game.id}
                     id={game.id}
                     title={game.title}
@@ -160,7 +85,7 @@ export default function ItemsGenre(props: IItemsGenreProps) {
           </div>
         ))}
 
-        <div ref={ref} className={clsx("hidden")}>
+        <div ref={ref} className={clsx("opacity-0")}>
           {"bottom"}
         </div>
       </div>

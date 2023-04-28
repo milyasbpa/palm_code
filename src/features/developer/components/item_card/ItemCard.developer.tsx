@@ -1,7 +1,7 @@
 import * as React from "react";
 import clsx from "clsx";
 
-export interface IItemCardDevelopersProps {
+export interface IItemCardDeveloperProps {
   id?: number;
   title?: string;
   thumbnail?: string;
@@ -16,7 +16,7 @@ export interface IItemCardDevelopersProps {
   onClickItem?: (id: number) => void;
 }
 
-ItemCardDevelopers.defaultProps = {
+ItemCardDeveloper.defaultProps = {
   id: -1,
   title: "Overwatch 2",
   thumbnail: "https://www.freetogame.com/g/540/thumbnail.jpg",
@@ -31,7 +31,7 @@ ItemCardDevelopers.defaultProps = {
   freetogame_profile_url: "https://www.freetogame.com/overwatch-2",
 };
 
-export default function ItemCardDevelopers(props: IItemCardDevelopersProps) {
+export default function ItemCardDeveloper(props: IItemCardDeveloperProps) {
   const handleClickItem = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     if (props.onClickItem) {
