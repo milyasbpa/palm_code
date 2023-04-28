@@ -33,7 +33,7 @@ export const GamesHomeDataReducer = (
         ...state,
         pagination: {
           ...state.pagination,
-          offset: 10,
+          offset: state.pagination.offset + 10,
         },
         data: [...state.data, ...action.payload],
       };

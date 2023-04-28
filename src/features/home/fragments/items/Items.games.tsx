@@ -30,13 +30,14 @@ export default function ItemsGames(props: IItemsGamesProps) {
 
   useEffect(() => {
     if (inView) {
+      console.log(inView, "ini inview");
       dispatch({
         type: GamesHomeActionEnum.AddGameData,
         payload: state.games.raw
           .filter(
             (_, index) =>
               index > state.games.data.length &&
-              index <= state.games.pagination.offset
+              index <= state.games.pagination.offset + 10
           )
           .map((game) => {
             return {
@@ -128,9 +129,7 @@ export default function ItemsGames(props: IItemsGamesProps) {
           ))}
         </div>
       </div>
-      <div ref={ref} className={clsx("bg-black w-full")}>
-        {"bottom"}
-      </div>
+      <div ref={ref}>{"bottom"}</div>
     </div>
   );
 }

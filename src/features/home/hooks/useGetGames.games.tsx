@@ -39,7 +39,7 @@ export const useHomeGetGames = () => {
         dispatch({
           type: GamesHomeActionEnum.AddGameData,
           payload: data
-            .filter((_, index) => index < state.games.pagination.offset + 10)
+            .filter((_, index) => index < 10)
             .map((game) => {
               return {
                 id: game.id,
