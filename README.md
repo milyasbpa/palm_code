@@ -16,9 +16,17 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## How To Deploy
 
+```bash
 npm install
+# or
 npm run build
+# or
 npm run start
+```
+
+## Environment
+
+Environment is available in .env.example because .env was hidden from this repository
 
 ## Library
 
