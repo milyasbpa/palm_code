@@ -97,18 +97,20 @@ export default function ItemsGenres(props: IItemsGenresProps) {
                 "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
               )}
             >
-              {state.games.data[key].map((game) => (
-                <ItemCardGames
-                  key={game.id}
-                  id={game.id}
-                  title={game.title}
-                  short_description={game.short_description}
-                  publisher={game.publisher}
-                  release_date={game.release_date}
-                  developer={game.developer}
-                  platform={game.platform}
-                />
-              ))}
+              {state.games.data[key]
+                .filter((_, index) => index < 4)
+                .map((game) => (
+                  <ItemCardGames
+                    key={game.id}
+                    id={game.id}
+                    title={game.title}
+                    short_description={game.short_description}
+                    publisher={game.publisher}
+                    release_date={game.release_date}
+                    developer={game.developer}
+                    platform={game.platform}
+                  />
+                ))}
             </div>
           </div>
         ))}
