@@ -39,7 +39,6 @@ export default function ItemsGenre(props: IItemsGenreProps) {
 
   useEffect(() => {
     if (inView) {
-      console.log("inview");
       const data = groupBy(
         queryClient.getQueryData(
           GenreReactQueryKey.GetGames(payload)

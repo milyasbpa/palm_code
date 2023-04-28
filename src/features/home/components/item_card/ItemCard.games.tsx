@@ -43,7 +43,6 @@ export default function ItemCardGames(props: IItemCardGamesProps) {
     }
   };
 
-  console.log(props.id, "ini id");
   return (
     <button
       className={clsx(
